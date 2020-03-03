@@ -454,5 +454,11 @@ namespace SuperAdventure1._1
                 cboPotions.SelectedIndex = 0;
             }
         }
+
+        private void rtbMessages_TextChanged(object sender, EventArgs e)
+        {
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
+        }
     }
 }
