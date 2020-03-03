@@ -12,10 +12,12 @@ namespace Engine
         public int MaximumHitPoints { get; set; }
         public int Gold { get; set; }
         public int ExperiencePoints { get; set; }
+        public Location CurrentLocation { get; set; }
         public int Level { get; set; }
         public List<InventoryItem> Inventory { get; set; }
         public List<PlayerQuest> Quests { get; set; }
         public Player(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints, int level) : base(currentHitPoints, maximumHitPoints)
+            
 
         {
             Gold = gold;
