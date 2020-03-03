@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,22 +17,26 @@ namespace SuperAdventure1._1
     {
         private Player _player;
         private Monster _currentMonster;
-
+        private const string PLAYER_DATA_FILE_NAME = "PlayerData.xml";
         public SuperAdventure()
         {
             InitializeComponent();
 
-            _player = new Player(10, 10, 20, 0);
-            MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
-            _player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
+            if (File.Exists(PLAYER_DATA_FILE_NAME))
+            {
+                _player = Player.CreatePlayerFromXmlString(File.ReadAllText(PLAYER_DATA_FILE_NAME));
+            }
+            else
+            {
+                _player = Player.CreateDefaultPlayer();
+            }
 
-            lblHitPoints.Text = _player.CurrentHitPoints.ToString();
-            lblGold.Text = _player.Gold.ToString();
-            lblExperience.Text = _player.ExperiencePoints.ToString();
-            lblLevel.Text = _player.Level.ToString();
+            MoveTo(_player.CurrentLocation);
+
+            UpdatePlayerStats();
         }
 
-            private void UpdatePlayerStats()
+        private void UpdatePlayerStats()
         {
             // Refresh player information and inventory controls
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
@@ -468,6 +473,11 @@ namespace SuperAdventure1._1
         {
             rtbMessages.SelectionStart = rtbMessages.Text.Length;
             rtbMessages.ScrollToCaret();
+        }
+
+        private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, _player.ToXmlString());
         }
     }
 }
