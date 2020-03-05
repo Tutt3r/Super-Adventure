@@ -40,6 +40,7 @@ namespace Engine
         public const int LOCATION_ID_FARM_FIELD = 7;
         public const int LOCATION_ID_BRIDGE = 8;
         public const int LOCATION_ID_SPIDER_FIELD = 9;
+        public const int LOCATION_ID_SECRET_ROOM = 10;
 
         static World()
         {
@@ -134,8 +135,12 @@ namespace Engine
             Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering covering the trees in this forest.");
             spiderField.MonsterLivingHere = MonsterByID(MONSTER_ID_GIANT_SPIDER);
 
+            Location secretRoom = new Location(LOCATION_ID_SECRET_ROOM, "Secret Room", "Congratulations! Here is your reward https://bit.ly/38ntizX");
             // Link the locations together
             home.LocationToNorth = townSquare;
+            home.LocationToSouth = secretRoom;
+
+            secretRoom.LocationToNorth = home;
 
             townSquare.LocationToNorth = alchemistHut;
             townSquare.LocationToSouth = home;
