@@ -135,8 +135,10 @@ namespace Engine
             Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering covering the trees in this forest.");
             spiderField.MonsterLivingHere = MonsterByID(MONSTER_ID_GIANT_SPIDER);
 
-            Location secretRoom = new Location(LOCATION_ID_SECRET_ROOM, "Secret Room", "Congratulations! Here is your reward https://bit.ly/38ntizX");
+            Location secretRoom = new Location(LOCATION_ID_SECRET_ROOM, "Secret Room", "Congratulations! Here is your reward https://bit.ly/38ntizX", ItemByID(ITEM_ID_SPIDER_FANG));
+            secretRoom.Secret = true;
             // Link the locations together
+
             home.LocationToNorth = townSquare;
             home.LocationToSouth = secretRoom;
 
@@ -175,6 +177,7 @@ namespace Engine
             Locations.Add(farmersField);
             Locations.Add(bridge);
             Locations.Add(spiderField);
+            Locations.Add(secretRoom);
         }
 
         public static Item ItemByID(int id)

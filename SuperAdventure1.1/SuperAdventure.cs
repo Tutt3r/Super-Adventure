@@ -137,10 +137,10 @@ namespace SuperAdventure1._1
             _player.CurrentLocation = newLocation;
 
             // Show/hide available movement buttons
-            btnNorth.Visible = (newLocation.LocationToNorth != null);
-            btnEast.Visible = (newLocation.LocationToEast != null);
-            btnSouth.Visible = (newLocation.LocationToSouth != null);
-            btnWest.Visible = (newLocation.LocationToWest != null);
+            btnNorth.Visible = (newLocation.LocationToNorth != null && newLocation.LocationToNorth.IsVisible(_player));
+            btnEast.Visible = (newLocation.LocationToEast != null && newLocation.LocationToEast.IsVisible(_player));
+            btnSouth.Visible = (newLocation.LocationToSouth != null && newLocation.LocationToSouth.IsVisible(_player));
+            btnWest.Visible = (newLocation.LocationToWest != null && newLocation.LocationToWest.IsVisible(_player));
 
             // Display current location name and description
             rtbLocation.Text = newLocation.Name + Environment.NewLine;
